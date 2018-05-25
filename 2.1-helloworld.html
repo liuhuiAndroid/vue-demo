@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello World</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- 差值表达式{{}} -->
+    <div id="app">{{content}}</div>
+
+    <div>{{content}}</div>
+
+    <!-- <script>
+         var dom = document.getElementById('app');
+        dom.innerHTML = 'hello world';
+        setTimeout(() => {
+            dom.innerHTML = 'hello y'
+        }, 2000);
+    </script> -->
+
+    <script>
+        // 创建Vue实例
+        var app = new Vue({
+            // el:实例负责管理的区域
+            el: '#app',
+            // data:定义一些数据
+            data: {
+                content:'hello world!'
+            }
+        })
+
+        setTimeout(() => {
+            app.$data.content = 'hello y'
+        }, 2000);
+    </script>
+</body>
+</html>

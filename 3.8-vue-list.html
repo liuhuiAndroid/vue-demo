@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tVue中的列表渲染</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <div v-for="(item,index) of list" :key="item.id">
+            {{item.text}}---{{index}}
+        </div> -->
+
+        <!-- 不会真正渲染到页面上 -->
+        <template v-for="(item,index) of list">
+            <div>
+                {{item.text}}---{{index}}
+            </div>
+            <span>
+                {{item.text}}
+            </span>
+        </template>
+
+        <div v-for="(item,key,index) of userInfo">
+            {{item}} -- {{key}} -- {{index}}
+        </div>
+    </div>
+    
+    <script>
+        // 数组的变异方法：push pop shift unshift splice sort reverse
+        // vm.list.splice(1,1,{id:"11",text:"bb"})
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                list:[{
+                    id:00001,
+                    text:"hello"
+                },{
+                    id:00002,
+                    text:"nice"
+                },{
+                    id:00003,
+                    text:"meet"
+                },{
+                    id:00004,
+                    text:"you"
+                }],
+                userInfo:{
+                    name: "wy",
+                    age: 28,
+                    gender: "male",
+                    salary: "secret"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

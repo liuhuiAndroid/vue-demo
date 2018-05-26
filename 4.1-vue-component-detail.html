@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件使用的细节点</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <table>
+            <tbody>
+                <!-- tbody里必须是tr 可以用is解决bug -->
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+        <div ref='hello' @click="handleClick">
+            Hello World
+        </div>
+
+        <!-- 计数器求和，理解ref -->
+        <counter ref="one" @change="handleChange"></counter>
+        <counter ref="two" @change="handleChange"></counter>
+        <div>{{total}}</div>
+    </div>
+    <script>
+        Vue.component('row', {
+            // 子组件定义data必须是一个函数，而不能是一个对象
+            data: function(){
+                return {
+                    content: 'this is content'
+                }
+            },
+            template: '<tr><td>{{content}}</td></tr>'
+        })
+        
+        Vue.component('counter', {
+            data: function(){
+                return {
+                    number: 0
+                }
+            },
+            template: '<div @click="handleClick">{{number}}</div>',
+            methods: {
+                handleClick: function(){
+                    this.number ++;   
+                    this.$emit('change')
+                }
+            }
+        })
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                total: 0
+            },
+            methods: {
+                handleClick: function(){
+                    alert(this.$refs.hello.innerHTML);
+                },
+                handleChange: function(){
+                    // alert('change');
+                    console.log(this.$refs.one.number);
+                    console.log(this.$refs.two.number);
+                    this.total = this.$refs.one.number + this.$refs.two.number;
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

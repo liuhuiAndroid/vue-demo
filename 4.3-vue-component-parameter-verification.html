@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件参数校验与非Props特性</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- props特性要求父组件传，子组件要接，我们可以在子组件用 -->
+        <!-- 非props特性，子组件无法使用，对应的属性值会显示 -->
+        <child content="hell"></child>
+    </div>
+    
+    <script>
+        Vue.component('child',{
+            // props: {
+            //     // content :[Number]
+            //     content: {
+            //         type: String,
+            //         required: true,
+            //         default: 'default value',
+            //         validator: function(value){
+            //             return (value.length > 2)
+            //         }
+            //     }
+            // },
+            // template: '<div>{{content}}</div>'
+            template: '<div>hello</div>'
+        })
+        var vm = new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+</html>
